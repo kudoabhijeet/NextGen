@@ -1,0 +1,13 @@
+- hosts: localhost
+  vars_files:
+        - vars/ec2_variables
+  tasks:
+          - ec2:
+                region: "{{ region }}"
+                instance_type: "{{ instance_type }}"
+                image: "{{ image }}"
+                aws_access_key: A*******************4
+                aws_secret_key: j*********************************d
+                instance_tags:
+                        name: "{{ name }}"
+               
