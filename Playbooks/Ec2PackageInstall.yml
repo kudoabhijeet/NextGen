@@ -1,0 +1,9 @@
+- hosts: 15.206.178.148
+  tasks:
+          #          - package:
+          #       name: epel-release
+          #       state: present 
+          - name: install software
+            yum:
+                name: nginx
+                state: present

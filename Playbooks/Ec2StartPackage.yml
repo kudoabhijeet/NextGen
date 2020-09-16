@@ -1,0 +1,38 @@
+- hosts: 15.206.178.148
+  tasks:
+          - package:
+                name: git
+                state: present 
+          - name: install software
+            yum:
+                name: nginx
+                state: present
+          - name: start service
+            service:
+                    name: nginx
+                    state: started
+                    enabled: yes
+          - name: clone repository
+            git:
+                    dest: /usr/share/nginx/html/web 
+                    repo: 'https://github.com/akash2237778/Open-Web.git'
+                    clone: yes
+                    update: yes
+          - name: copy the nginx config file and restart nginx
+            copy:
+                        src: static_site.cfg
+                        dest: /etc/nginx/static_site.cfg
+          - name: start service
+            service:
+                    name: nginx
+                    state: restarted
+                    enabled: yes
+          - name:
+            sefcontext:
+                    setype: '{{ item }}'
+                    target: '/usr/share/nginx/html/web(/.*)?'
+                    state: present
+            with_items:
+                    - 'httpd_sys_content_t'
+          - name: Apply new SELinux file context to filesystem
+            command: restorecon -irv /usr/share/nginx/
