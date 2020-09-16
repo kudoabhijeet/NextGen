@@ -6,10 +6,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _selectedRegion = 0;
+  List<DropdownMenuItem<int>> regionList = [];
+
+  void getRegionList() {
+    regionList = [];
+    regionList.add(new DropdownMenuItem(
+      child: new Text('South'),
+      value: 0,
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Color(0xFF197163),
+    return Material(
+      color: Color(0xFF2ec1ac),
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -17,29 +28,24 @@ class _HomePageState extends State<HomePage> {
           // Add AWS Account option
           // Add Github Account option
           children: <Widget>[
-            // Text(
-            //   "Welcome",
-            //   style: TextStyle(fontSize: 30, color: Color(0xFFf4f4f4)),
-            // ),
-            SizedBox(
-              height: 100,
+            DropdownButton(
+              hint: Text('Select Region'),
+              items: regionList,
+              onChanged: null,
+              value: _selectedRegion,
             ),
-            OutlineButton(
-              onPressed: null,
-              highlightedBorderColor: Colors.black,
-              child: Text(
-                "Link AWS Account",
-                style: TextStyle(fontSize: 20, color: Color(0xFFf4f4f4)),
-              ),
+            DropdownButton(
+              hint: Text('Select Instance type'),
+              items: regionList,
+              onChanged: null,
+              value: _selectedRegion,
             ),
-            OutlineButton(
-              onPressed: null,
-              highlightedBorderColor: Colors.black,
-              child: Text(
-                "Link Github Account",
-                style: TextStyle(fontSize: 20, color: Color(0xFFf4f4f4)),
-              ),
-            ),
+            DropdownButton(
+              hint: Text('Select Image'),
+              items: regionList,
+              onChanged: null,
+              value: _selectedRegion,
+            )
           ]),
     );
   }
